@@ -10,4 +10,6 @@ Gem::Specification.new do |s|
     s.email         = "contact@riley0122.dev"
     s.files         = FileList['lib/**/*.rb']
     s.bindir        = 'bin'
+    s.homepage      = 'https://github.com/riley0122/rubymag#readme'
+    s.metadata      = { "source_code_uri" => "https://github.com/riley0122/rubymag" }
 end
