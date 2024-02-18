@@ -28,6 +28,7 @@ class Profile
       if response.is_a?(Net::HTTPSuccess)
         res = JSON.parse(response.body)
         person = res["Persoon"]
+        @id = person["Id"].to_i
         puts "Succesfully authenticated as #{person["Roepnaam"]} with id #{person["Id"]}"
       else
         puts "Failed to authenticate, http code #{response.code}"
@@ -42,7 +43,7 @@ class Profile
       puts "Not yet authenticated!"
       self.verify()
     end
-    uri = URI("https://#{@school}.magister.net/api/#{endpoint}".gsub("{*id*}", @id))
+    uri = URI("https://#{@school}.magister.net/api#{endpoint}".gsub("{*id*}", @id.to_s))
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     request = Net::HTTP::Get.new(uri.request_uri)
