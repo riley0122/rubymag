@@ -8,3 +8,5 @@ Dotenv.load
 
 magister = Magister.new
 magister.authenticate(ENV['SCHOOL'], ENV['TOKEN'])
+
+puts magister.get_classes("2024-02-18", "2024-02-20")
