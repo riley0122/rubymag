@@ -36,4 +36,28 @@ class Profile
       puts "An error occurred #{e}"
     end
   end
+
+  def authenticatedRequest(endpoint)
+    if @id == 0
+      puts "Not yet authenticated!"
+      self.verify()
+    end
+    uri = URI("https://#{@school}.magister.net/api/#{endpoint}".gsub("{*id*}", @id))
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Get.new(uri.request_uri)
+    request['authorization'] = "Bearer #{@token}"
+
+    begin
+      response = http.request(request)
+      if response.is_a?(Net::HTTPSuccess)
+        return JSON.parse(response.body)
+      else
+        puts "failed to get #{endpoint}, status code #{response.code}"
+        return nil
+      end
+    rescue StandardError => e
+      puts "An error occurred #{e}"
+    end
+  end
 end
