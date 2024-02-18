@@ -15,4 +15,8 @@ class Magister
         @profile = Profile.new(token, school)
         @profile.verify
     end
+
+    def profile
+        @profile
+    end
 end

@@ -12,6 +12,16 @@ class Profile
     @school = school
   end
 
+  def id
+    @id
+  end
+  def school
+    @school
+  end
+  def inspect
+    "#<#{self.class}:0x#{object_id} @token=\"[PRIVATE]\", @id=#{@id}, @school=#{@school}>"
+  end
+
   def verify()
     if @school == nil || @token == nil
       puts "Either school or token was not defined!"
