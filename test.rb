@@ -13,6 +13,6 @@ magister.login(ENV["SCHOOL"], ENV["_USERNAME"], ENV["PASSWORD"])
 
 magister.profile.verify
 
-puts magister.profile.id
-puts magister.profile.school
+puts
+puts "user id: #{magister.profile.id}; school: #{magister.profile.school}"
 puts "Welcome #{magister.profile.person["Roepnaam"]} #{magister.profile.person["Achternaam"]}"
