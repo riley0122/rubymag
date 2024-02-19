@@ -33,3 +33,11 @@ puts "You have succesfully logged in to #{magister.profile.school}."
 ```
 
 For more in depth documentation, [see the wiki](https://github.com/riley0122/rubymag/wiki)
+
+# Example
+
+This is the output from [this very simple code](https://github.com/riley0122/rubymag/blob/84d8b68f02525181708b8ef7448d34470d386abe/test.rb)
+
+Personal details are blanked out in this image.
+
+![The output just as you'd expect, populated with actual data](assets/result.jpg)
