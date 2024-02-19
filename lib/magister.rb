@@ -1,9 +1,9 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
-require './lib/magister/profile.rb'
-require './lib/magister/data.rb'
-require './lib/magister/authenticator.rb'
+require 'magister/profile.rb'
+require 'magister/data.rb'
+require 'magister/authenticator.rb'
 
 # can be either "selenium" or "local"
 # "selenium" will run headlessly
