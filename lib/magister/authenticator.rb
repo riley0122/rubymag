@@ -37,6 +37,7 @@ module Authenticator
         if $authMode == "local"
             raise NotImplementedError.new("\n\nLocal authentication mode has not been implemented yet, \nCheck our github for any updates, or if you want to help implementing it!\n")
         else
+            puts "Using Selenium with Chrome for authentication."
             options = Selenium::WebDriver::Options.chrome(args: ['--headless=new'])
             driver = Selenium::WebDriver.for :chrome, options: options
 
