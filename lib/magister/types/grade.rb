@@ -44,7 +44,7 @@ class Grade
     def grade
         @grade
     end
-    def values
+    def value
         @grade
     end
     def weight
