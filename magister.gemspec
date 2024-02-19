@@ -12,4 +12,7 @@ Gem::Specification.new do |s|
     s.bindir        = 'bin'
     s.homepage      = 'https://github.com/riley0122/rubymag#readme'
     s.metadata      = { "source_code_uri" => "https://github.com/riley0122/rubymag" }
+    s.add_dependency "json"
+    s.add_dependency "securerandom"
+    s.add_dependency "base64"
 end
