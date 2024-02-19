@@ -1,7 +1,8 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
-require 'magister/types/class.rb'
+require 'magister/types/class'
+require 'magister/types/grade'
 require 'date'
 require 'json'
 
@@ -27,7 +28,12 @@ module MagisterData
         end
     end
 
-    def get_grades(count, page)
-        @profile.authenticatedRequest("/personen/{*id*}/cijfers/laatste?top=#{count}&skip=#{count * page}")
+    def get_grades(count = 5, page = 0)
+        data = @profile.authenticatedRequest("/personen/{*id*}/cijfers/laatste?top=#{count}&skip=#{count * page}")
+        grades = Array.new
+        data["items"].each do |grade|
+            grades.push Grade.new(grade)
+        end
+        grades
     end
 end
