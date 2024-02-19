@@ -15,4 +15,5 @@ Gem::Specification.new do |s|
     s.add_dependency "json"
     s.add_dependency "securerandom"
     s.add_dependency "base64"
+    s.add_dependency "selenium-webdriver"
 end

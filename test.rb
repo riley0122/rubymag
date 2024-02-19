@@ -8,7 +8,10 @@ require './lib/magister/authenticator.rb'
 Dotenv.load
 
 magister = Magister.new
-magister.login(ENV["SCHOOL"], ENV["USERNAME"], ENV["PASSWORD"])
+
+magister.login(ENV["SCHOOL"], ENV["_USERNAME"], ENV["PASSWORD"])
+
+magister.profile.verify
 
 puts magister.profile.id
 puts magister.profile.school

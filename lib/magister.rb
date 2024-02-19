@@ -22,7 +22,7 @@ class Magister
         @profile.verify
     end
     def login(school, username, password)
-        @profile = authenticator.login(username, password, school)
+        @profile = Authenticator.login(username, password, school)
     end
 
     def profile

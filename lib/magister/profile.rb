@@ -30,7 +30,7 @@ class Profile
       puts "Either school or token was not defined!"
     end
     puts "authenticating to #{@school}..."
-    uri = URI("https://#{@school}.magister.net/api/account?noCache=0")
+    uri = URI("https://#{@school}.magister.net/api/account")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     request = Net::HTTP::Get.new(uri.request_uri)
