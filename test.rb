@@ -15,4 +15,4 @@ magister.profile.verify
 
 puts magister.profile.id
 puts magister.profile.school
-puts magister.get_classes("2024-02-25", "2024-03-05")
+puts "Welcome #{magister.profile.person["Roepnaam"]} #{magister.profile.person["Achternaam"]}"

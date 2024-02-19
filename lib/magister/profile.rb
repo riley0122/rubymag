@@ -10,6 +10,7 @@ class Profile
     @token = token
     @id = 0
     @school = school
+    @person = nil
   end
 
   def token=(token)
@@ -23,6 +24,10 @@ class Profile
   end
   def inspect
     "#<#{self.class}:0x#{object_id} @token=\"[PRIVATE]\", @id=#{@id}, @school=#{@school}>"
+  end
+
+  def person
+    @person
   end
 
   def verify()
@@ -40,9 +45,9 @@ class Profile
       response = http.request(request)
       if response.is_a?(Net::HTTPSuccess)
         res = JSON.parse(response.body)
-        person = res["Persoon"]
+        @person = res["Persoon"]
         @id = person["Id"].to_i
-        puts "Succesfully authenticated as #{person["Roepnaam"]} with id #{person["Id"]}"
+        puts "Succesfully authenticated as #{@person["Roepnaam"]} with id #{@person["Id"]}"
       else
         puts "Failed to authenticate, http code #{response.code}"
       end
