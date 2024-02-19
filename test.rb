@@ -3,7 +3,6 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 require 'dotenv'
 require 'magister'
-require 'magister/types/subject'
 require 'json'
 
 Dotenv.load
