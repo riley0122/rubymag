@@ -12,6 +12,9 @@ class Profile
     @school = school
   end
 
+  def token=(token)
+    @token=token
+  end
   def id
     @id
   end
