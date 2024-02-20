@@ -36,6 +36,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.2.2
+      - name: install yardoc
+        run: gem install yard
       - name: generate yardoc documentation
         run: yard doc 
       - name: Upload artifact
