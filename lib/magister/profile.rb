@@ -1,6 +1,7 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
+require 'magister/types/person'
 require 'uri'
 require 'net/http'
 require 'json'
@@ -45,9 +46,9 @@ class Profile
       response = http.request(request)
       if response.is_a?(Net::HTTPSuccess)
         res = JSON.parse(response.body)
-        @person = res["Persoon"]
-        @id = person["Id"].to_i
-        puts "Succesfully authenticated as #{@person["Roepnaam"]} with id #{@person["Id"]}"
+        @person = Person.new res["Persoon"]
+        @id = @person.id.to_i
+        puts "Succesfully authenticated as #{@person.firstName} with id #{@person.id}"
       else
         puts "Failed to authenticate, http code #{response.code}"
       end
