@@ -12,7 +12,7 @@ $authMode = "selenium"
 
 # Caching options
 $magister_useCache = true
-$magister_chachingDirectory = "./cache/magister"
+$magister_chachingDirectory = "./.cache/magister"
 # Cache type can eitehr be "compact" or "json"
 $magister_cacheType = "json"
 # Wether to encrypt the cache, this can secure the acount by not exposing the token or any sensetive data.
