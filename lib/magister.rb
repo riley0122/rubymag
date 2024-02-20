@@ -10,6 +10,16 @@ require 'magister/authenticator'
 # "local" will open a browser window for the user to login
 $authMode = "selenium"
 
+# Caching options
+$magister_useCache = true
+$magister_chachingDirectory = "./cache/magister"
+# Cache type can eitehr be "compact" or "json"
+$magister_cacheType = "json"
+# Wether to encrypt the cache, this can secure the acount by not exposing the token or any sensetive data.
+$magister_encryptCache = false
+# When using encryption, this may not be empty
+$magister_encryptionKey = ""
+
 class Magister
     include MagisterData
 
