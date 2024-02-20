@@ -15,7 +15,7 @@ magister.profile.verify
 
 puts
 puts "user id: #{magister.profile.id}; school: #{magister.profile.school}"
-puts "Welcome #{magister.profile.person["Roepnaam"]} #{magister.profile.person["Achternaam"]}"
+puts "Welcome #{magister.profile.person.firstName} #{magister.profile.person.lastName}"
 
 puts "===================="
 puts
