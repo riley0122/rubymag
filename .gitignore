@@ -1,3 +1,5 @@
 magister-*.*.*.gem
 .env
 .cache
+doc
+.yardoc
