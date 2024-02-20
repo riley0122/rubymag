@@ -56,84 +56,188 @@ class MagClass
     end
 
     # getters
+
+    # The ID of the class
+    # @return [Integer] the id
     def id
         @id
     end
+    # The time the class starts
+    # @return [String] the date formatted in ISO 8601
+    # @since 1.1.0
     def classStart
         @classStart
     end
+    # @see classStart
+    # @since 1.1.0
     def startTime
         @classStart
     end
+    # The time the class ends
+    # @return [String] the ending date formatted in ISO 8601
+    # @since 1.1.0
     def classEndInclusive
         @classEndInclusive
     end
+    # @see classEndInclusive
+    # @since 1.1.0
     def endTime
         @classEndInclusive
     end
+    # If the class lasts the whole day
+    # @return [Boolean]
+    # @since 1.1.0
     def wholeDay
         @wholeDay
     end
+    # The description of the class formatted like
+    # a - b - c.
+    # where a is a short version of the classes name.
+    # where b is the short code of the teachers name.
+    # where c is the class/group the class belongs to.
+    # @return [String] a - b - c
+    # @since 1.1.0
     def description
         @description
     end
+    # The location where the class is
+    # @note reccommended to use the +classrooms+ property instead
+    # @return [String] the location
+    # @see classrooms
+    # @since 1.1.0
     def location
         @location
     end
+    # The content of the class.
+    # @return [String, nil] the content
+    # @note This is stuff like homework or test descriptions.
+    # @since 1.1.0
     def content
         @content
     end
+    # A remark (opmerking) added to the class
+    # @return [String, nil] the remark
+    # @note This is diffrent form the +note+
+    # @see note
+    # @since 1.1.0
     def remark
         @remark
     end
+    # A note (aantekening) added to the class
+    # @return [String, nil] the note
+    # @note This is diffrent from +remark+
+    # @see remark
+    # @since 1.1.0
     def note
         @note
     end
+    # If it is marked as finished
+    # @note this has been set by the user, not by the teacher or anyone else.
+    # @return [Boolean]
+    # @since 1.1.0
     def finished
         @finished
     end
+    # If the class repeats
+    # @note Currently we are not certain what every status means.
+    # @return [Integer] the status
+    # @since 1.1.0
     def repeatStatus
         @repeatStatus
     end
+    # |?| How it repeats
+    # @note We do not have info on what this property does/means
+    # @return [?]
+    # @since 1.1.0
     def repeat
         @repeat
     end
+    # What subjects are in this class
+    # @return [Array<Subject>] The subjects
+    # @since 1.1.0
     def subjects
         @subjects
     end
+    # What teachers are giving this class
+    # @return [Array<Teacher>] The teachers
+    # @since 1.1.0
     def teachers
         @teachers
     end
+    # What classrooms this class is given in
+    # @return [Array<ClassRoom>] The classrooms
+    # @since 1.1.0
     def classrooms
         @classrooms
     end
+    # If the class has any attachments
+    # @return [Boolean] has attachments
+    # @see attachments
+    # @since 1.1.0
     def hasAttachments
         @hasAttachments
     end
+    # The attachments that are attached
+    # @note Unsure yet what type the attachments will be
+    # @return [?, nil]
+    # @since 1.1.0
     def attachments
         @attachments
     end
+
+    # |?| What kind of content it has
+    # @note We do not have info on what this property does/means
+    # @return [?]
+    # @since 1.1.0
     def infoType
         @infoType
     end
+    # |?| if the class is cancelled etc?
+    # @note We do not have info on what this property does/means
+    # @return [Integer]
+    # @since 1.1.0
     def status
         @status
     end
+    # |?|
+    # @note We do not have info on what this property does/means
+    # @return [?]
+    # @since 1.1.0
     def type
         @type
     end
+    # |?|
+    # @note We do not have info on what this property does/means
+    # @return [?]
+    # @since 1.1.0
     def subtype
         @subtype
     end
-    def usOnline
+    # |?| Wether or not the class has online attendance
+    # @note We do not have info on what this property does/means
+    # @return [Boolean]
+    # @since 1.1.0
+    def isOnline
         @isOnline
     end
+    # |?|
+    # @note We do not have info on what this property does/means
+    # @return [Integer]
+    # @since 1.1.0
     def viewType
         @viewType
     end
+    # |?|
+    # @note We do not have info on what this property does/means
+    # @return [?]
+    # @since 1.1.0
     def assignmentId
         @assignmentId
     end
+    # |?|
+    # @note We do not have info on what this property does/means
+    # @return [?, nil]
+    # @since 1.1.0
     def groups
         @groups
     end
