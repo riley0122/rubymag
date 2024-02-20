@@ -4,6 +4,9 @@
 require 'json'
 
 class Grade
+    # Returns a new instance of Grade.
+    # @param rawParsed [Hash] The raw data, yet it has already been parsed (like with JSON.parse)
+    # @since 1.1.0
     def initialize(rawParsed)
         @id             = rawParsed["kolomId"]
         @description    = rawParsed["omschrijving"]

@@ -7,6 +7,9 @@ require "magister/types/teacher.rb"
 
 # MagClass instead of Class becasue ruby got confused with class
 class MagClass
+    # Returns a new instance of MagClass.
+    # @param rawParsed [Hash] The raw data, yet it has already been parsed (like with JSON.parse)
+    # @since 1.1.0
     def initialize(rawParsed)
         @id                 = rawParsed["Id"]
         @classStart         = rawParsed["Start"]
