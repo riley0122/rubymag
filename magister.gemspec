@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
     s.files         = FileList['lib/**/*.rb']
     s.bindir        = 'bin'
     s.homepage      = 'https://github.com/riley0122/rubymag#readme'
-    s.metadata      = { "source_code_uri" => "https://github.com/riley0122/rubymag" }
+    s.metadata      = { "source_code_uri" => "https://github.com/riley0122/rubymag", "documentation_uri" => "https://riley0122.github.io/rubymag" }
     s.add_dependency "json", '~> 2.7', '>= 2.7.1'
     s.add_dependency "securerandom", '~> 0.3.1'
     s.add_dependency "base64", '~> 0.2.0'
