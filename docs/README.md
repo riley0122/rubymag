@@ -32,7 +32,7 @@ puts "Welcome #{magister.profile.person["Roepnaam"]} #{magister.profile.person["
 puts "You have succesfully logged in to #{magister.profile.school}."
 ```
 
-For more in depth documentation, [see the wiki](https://github.com/riley0122/rubymag/wiki)
+For more in depth documentation, [see the docs](https://riley0122.github.io/rubymag)
 
 # Example
 
