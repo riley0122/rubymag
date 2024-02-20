@@ -11,7 +11,7 @@ class ClassRoom
     end
 
     # The name of the class
-    # @returns [String] name
+    # @return [String] name
     # @since 1.1.0
     def name
         @name
