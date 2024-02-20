@@ -7,7 +7,9 @@ class ClassRoom
       @name = rawParsed["Naam"]
     end
 
-    # singular getter
+    # The name of the class
+    # @returns [String] name
+    # @since 1.1.0
     def name
         @name
     end
