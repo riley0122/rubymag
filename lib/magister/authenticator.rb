@@ -8,6 +8,7 @@ require 'securerandom'
 require 'base64'
 require 'digest'
 require 'selenium-webdriver'
+require 'time'
 
 module Authenticator
     extend self
@@ -21,6 +22,19 @@ module Authenticator
         # oidc_conf = (response.body.split("config =").last.split("};").first.gsub("window.location.hostname", "'" + uri.hostname + "'") + "}").gsub(': ', '":').gsub(/,(\s*)/, ',"').gsub(/{(\s*)/, '{"').gsub("'", '"').gsub('" + "', "")
 
         # oidc_conf = JSON.parse(oidc_conf)
+        if $magister_useCache && File.exist?($magister_cachingDirectory + "/auth.json")
+            f = File.open($magister_cachingDirectory + "/auth.json")
+            cached_data = f.read
+            cached_data = JSON.parse(cached_data)
+            expires = Time.at(cached_data["expires"].to_i)
+            puts "attempting to use cached token..."
+            if expires.to_i > Time.now.to_i
+              puts "using cached token."
+              return Profile.new(cached_data["token"], school)
+            else
+              puts "cached token expired."
+            end
+        end
 
         codeVerifier  = SecureRandom.alphanumeric(128)
         verifier      = Base64.urlsafe_encode64(codeVerifier)
@@ -34,6 +48,7 @@ module Authenticator
         auth_uri = "https://#{school}.magister.net/connect/authorize?client_id=M6LOAPP&redirect_uri=m6loapp%3A%2F%2Foauth2redirect%2F&scope=openid%20profile%20opp.read%20opp.manage%20attendance.overview%20attendance.administration%20calendar.ical.user%20calendar.to-do.user%20grades.read%20grades.manage&state=#{@@state}&nonce=#{@@nonce}&code_challenge=#{challenge}&code_challenge_method=S256&prompt=select_account"
         # puts "using authentication url #{auth_uri}"
 
+        token = ""
         if $authMode == "local"
             raise NotImplementedError.new("\n\nLocal authentication mode has not been implemented yet, \nCheck our github for any updates, or if you want to help implementing it!\n")
         else
@@ -63,11 +78,19 @@ module Authenticator
             wait = Selenium::WebDriver::Wait.new(timeout: 30)
             wait.until { driver.current_url.start_with? "https://#{school}.magister.net/oidc/redirect_callback.html" }
 
+            expires_in = driver.current_url.split("expires_in=").last.split("&").first.to_i
+            expires = Time.now + expires_in
             token = driver.current_url.split("access_token=").last.split("&").first
 
             driver.quit
-
-            return Profile.new(token, school)
         end
+
+        if $magister_useCache
+            if $magister_cacheType == "json"
+              File.write($magister_cachingDirectory + "/auth.json", "{\"token\": \"#{token}\", \"expires\": \"#{expires.to_i}\"}")
+            end
+        end
+
+        return Profile.new(token, school)
     end
 end

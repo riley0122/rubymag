@@ -12,7 +12,14 @@ $authMode = "selenium"
 
 # Caching options
 $magister_useCache = true
-$magister_chachingDirectory = "./.cache/magister"
+$magister_cachingDirectory = ".cache/magister"
+
+prev = ""
+$magister_cachingDirectory.split("/").each do |directory|
+    Dir.mkdir(prev + directory) unless File.exist?(prev + directory)
+    prev += directory + "/"
+end
+
 # Cache type can eitehr be "compact" or "json"
 $magister_cacheType = "json"
 # Wether to encrypt the cache, this can secure the acount by not exposing the token or any sensetive data.
