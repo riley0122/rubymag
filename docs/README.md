@@ -28,7 +28,7 @@ magister.profile.verify
 
 Then the user is logged in and you can get the user data!
 ```ruby
-puts "Welcome #{magister.profile.person["Roepnaam"]} #{magister.profile.person["Achternaam"]}!"
+puts "Welcome #{magister.profile.person.firstName} #{magister.profile.person.lastName}!"
 puts "You have succesfully logged in to #{magister.profile.school}."
 ```
 
