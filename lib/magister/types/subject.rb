@@ -2,6 +2,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+# This class represents a subject in magister in the sense of when it is linked to another object
 class Subject
     # Returns a new instance of Subject.
     # @param rawParsed [Hash] The raw data, yet it has already been parsed (like with JSON.parse)

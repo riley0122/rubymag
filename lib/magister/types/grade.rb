@@ -3,6 +3,7 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 require 'json'
 
+# This class is used to represent a grade and all metadata of it.
 class Grade
     # Returns a new instance of Grade.
     # @param rawParsed [Hash] The raw data, yet it has already been parsed (like with JSON.parse)

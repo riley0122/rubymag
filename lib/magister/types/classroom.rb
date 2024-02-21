@@ -2,6 +2,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+# This class represents a physical classroom.
 class ClassRoom
     # Returns a new instance of ClassRoom.
     # @param rawParsed [Hash] The raw data, yet it has already been parsed (like with JSON.parse)

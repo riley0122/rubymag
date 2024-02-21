@@ -5,6 +5,7 @@ require "magister/types/classroom.rb"
 require "magister/types/subject.rb"
 require "magister/types/teacher.rb"
 
+# This class describes a Class as it would appear in the schedule in magister.
 # MagClass instead of Class becasue ruby got confused with class
 class MagClass
     # Returns a new instance of MagClass.
@@ -54,6 +55,10 @@ class MagClass
         @groups             = rawParsed["Groepen"]
     end
 
+    # Gets a summary of the object.
+    # Overwrites default function.
+    # @return [String] object summary
+    # @since 1.1.0
     def inspect
         "#<#{self.class}:0x#{object_id} @id=#{@id}, @description=#{@description}, @subjects[0]=#{@subjects[0].inspect}, @teachers[0]=#{@teachers[0].inspect}, @location=#{@location}>"
     end
@@ -62,6 +67,7 @@ class MagClass
 
     # The ID of the class
     # @return [Integer] the id
+    # @since 1.1.0
     def id
         @id
     end

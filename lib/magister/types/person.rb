@@ -66,6 +66,8 @@ module Official
     end
 end
 
+# This class describes the person object the magister api gives us
+# this object includes all the user's personal data like name and birthday
 class Person
     include Birth
     include Official
