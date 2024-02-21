@@ -20,7 +20,7 @@ class Profile
   end
 
   # Set the user token
-  # @param [String] new token
+  # @param token [String] new token
   # @since 1.1.0
   def token=(token)
     @token=token

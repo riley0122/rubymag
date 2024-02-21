@@ -27,21 +27,37 @@ $magister_encryptCache = false
 # When using encryption, this may not be empty
 $magister_encryptionKey = ""
 
+# The main magister class
 class Magister
     include MagisterData
 
+    # Returns a new instance of Magister.
+    # @since 1.0.0
     def initialize
         @profile = nil
     end
 
+    # Create a new profile and authenticate with a token
+    # @param school [String] The school the user attends
+    # @param token [String] The users token
+    # @since 1.0.0
     def authenticate(school, token)
         @profile = Profile.new(token, school)
         @profile.verify
     end
+    # Create a new profile based on a username and password
+    # @param school [String] The school the user attends
+    # @param username [String] The users username
+    # @param password [String] The users password
+    # @see Authenticator#login
+    # @since 1.1.0
     def login(school, username, password)
         @profile = Authenticator.login(username, password, school)
     end
 
+    # Get the users profile
+    # @return [Profile] the profile
+    # @since 1.0.0
     def profile
         @profile
     end
