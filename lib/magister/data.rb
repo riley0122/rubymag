@@ -6,6 +6,10 @@ require 'magister/types/grade'
 require 'date'
 require 'json'
 
+# Validates a date
+# @param date [String]
+# @return [Boolean]
+# @see get_classes
 def validate_date(date)
     format = '%Y-%m-%d'
     DateTime.strptime(date, format)
@@ -14,7 +18,12 @@ rescue ArgumentError
     false
 end
 
+# Functions for getting or setting data from/to the magister apis
 module MagisterData
+    # Get all the scheduled classes between 2 dates
+    # @param dateFrom [String] the start of the selection
+    # @param dateTo [String] the end of the selection
+    # @since 1.0.0
     def get_classes(dateFrom, dateTo)
         if validate_date(dateFrom) && validate_date(dateTo)
             data = @profile.authenticatedRequest("/personen/{*id*}/afspraken?status=1&van=#{dateFrom}&tot=#{dateTo}")
@@ -28,6 +37,10 @@ module MagisterData
         end
     end
 
+    # Get a certain ammount of grades.
+    # @param count [String] The ammount of grades to get
+    # @param page [String] What page to get from
+    # @since 1.1.0
     def get_grades(count = 5, page = 0)
         data = @profile.authenticatedRequest("/personen/{*id*}/cijfers/laatste?top=#{count}&skip=#{count * page}")
         grades = Array.new

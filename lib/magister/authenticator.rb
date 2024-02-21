@@ -10,9 +10,15 @@ require 'digest'
 require 'selenium-webdriver'
 require 'time'
 
+# A module used to authenticate a user with the magister api.
 module Authenticator
     extend self
 
+    # Log in with username and password
+    # @param username [String] The username, usually in the form of a "leerlingnummer"
+    # @param password [String] The users password
+    # @param school [String] The school the user attends
+    # @since 1.1.0
     def login(username, password, school)
         # uri = URI("https://#{school}.magister.net/oidc_config.js")
         # http = Net::HTTP.new(uri.host, uri.port)

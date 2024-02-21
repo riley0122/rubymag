@@ -6,6 +6,7 @@ require 'uri'
 require 'net/http'
 require 'json'
 
+# This represents a profile or a user in magister
 class Profile
   # Returns a new instance of Profile.
   # @param token [String] the users token
