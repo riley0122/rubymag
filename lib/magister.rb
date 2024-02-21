@@ -14,12 +14,6 @@ $authMode = "selenium"
 $magister_useCache = true
 $magister_cachingDirectory = ".cache/magister"
 
-prev = ""
-$magister_cachingDirectory.split("/").each do |directory|
-    Dir.mkdir(prev + directory) unless File.exist?(prev + directory)
-    prev += directory + "/"
-end
-
 # Cache type can eitehr be "compact" or "json"
 $magister_cacheType = "json"
 # Wether to encrypt the cache, this can secure the acount by not exposing the token or any sensetive data.
@@ -35,6 +29,14 @@ class Magister
     # @since 1.0.0
     def initialize
         @profile = nil
+
+        if $magister_useCache
+            prev = ""
+            $magister_cachingDirectory.split("/").each do |directory|
+                Dir.mkdir(prev + directory) unless File.exist?(prev + directory)
+                prev += directory + "/"
+            end
+        end
     end
 
     # Create a new profile and authenticate with a token
