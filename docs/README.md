@@ -21,10 +21,7 @@ Then you can log the user with their school, username, and password.
 magister.login("someSchool", "123456", "p@s5W0rd!")
 ```
 
-After wich you have to verify their identity in order to obtain user data such as their id.
-```ruby
-magister.profile.verify
-```
+Since version 1.2.1 profile verifiying all happens automagically!
 
 Then the user is logged in and you can get the user data!
 ```ruby

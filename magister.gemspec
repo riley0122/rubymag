@@ -2,7 +2,7 @@ require "rake"
 
 Gem::Specification.new do |s|
     s.name          = "magister"
-    s.version       = "1.2.1"
+    s.version       = "1.2.2"
     s.licenses      = ["MPL-2.0"]
     s.summary       = "Magister API wrapper"
     s.description   = "An unofficial Magister API wrapper for ruby"
