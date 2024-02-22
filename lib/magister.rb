@@ -55,6 +55,7 @@ class Magister
     # @since 1.1.0
     def login(school, username, password)
         @profile = Authenticator.login(username, password, school)
+        @profile.verify
     end
 
     # Get the users profile
