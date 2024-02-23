@@ -1,6 +1,8 @@
 # rubymag
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/I2I4UTRLH)
+
 [![Ruby Gem](https://github.com/riley0122/rubymag/actions/workflows/gem-push.yml/badge.svg)](https://github.com/riley0122/rubymag/pkgs/rubygems/magister)
 [![Gem Version](https://badge.fury.io/rb/magister.svg)](https://rubygems.org/gems/magister)
 
