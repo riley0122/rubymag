@@ -58,9 +58,26 @@ module Authenticator
         if $authMode == "local"
             raise NotImplementedError.new("\n\nLocal authentication mode has not been implemented yet, \nCheck our github for any updates, or if you want to help implementing it!\n")
         else
-            puts "Using Selenium with Chrome for authentication."
-            options = Selenium::WebDriver::Options.chrome(args: ['--headless=new'])
-            driver = Selenium::WebDriver.for :chrome, options: options
+            if $magister_browser == "Chrome"
+                puts "Using Selenium with Chrome for authentication."
+                if !$magister_disableHeadless
+                    options = Selenium::WebDriver::Options.chrome(args: ['--headless=new'])
+                else
+                    options = Selenium::WebDriver::Options.chrome(args: [])
+                end
+                driver = Selenium::WebDriver.for :chrome, options: options
+            elsif $magister_browser == "Firefox"
+                puts "Using Selenium with Firefox for authentication."
+                if !$magister_disableHeadless
+                    options = Selenium::WebDriver::Options.firefox(args: ['--headless=new'])
+                else
+                    options = Selenium::WebDriver::Options.firefox(args: [])
+                end
+                driver = Selenium::WebDriver.for :firefox, options: options
+            else
+                puts "Invalid browser option #{$magister_browser}"
+                return
+            end
 
             driver.get auth_uri
             while !driver.current_url.start_with? "https://accounts.magister.net/account/login"

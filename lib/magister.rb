@@ -9,6 +9,10 @@ require 'magister/authenticator'
 # "selenium" will run headlessly
 # "local" will open a browser window for the user to login
 $authMode = "selenium"
+# Set what browser to use [Chrome|Firefox]
+$magister_browser = "Chrome"
+# To show the browser window for debugging purposes
+$magister_disableHeadless = false
 
 # Caching options
 $magister_useCache = true
