@@ -5,13 +5,11 @@ require 'dotenv'
 require 'magister'
 require 'json'
 
-Dotenv.load
+Dotenv.load('.env', 'magister.env')
 
 magister = Magister.new
 
 magister.login(ENV["SCHOOL"], ENV["_USERNAME"], ENV["PASSWORD"])
-
-magister.profile.verify
 
 puts
 puts "user id: #{magister.profile.id}; school: #{magister.profile.school}"
