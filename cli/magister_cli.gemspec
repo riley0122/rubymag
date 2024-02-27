@@ -12,6 +12,6 @@ Gem::Specification.new do |s|
     s.require_path  = 'lib'
     s.bindir        = 'bin'
     s.executables   = ['magister']
-    s.homepage      = 'https://github.com/riley0122/rubymag/cli#readme'
-    s.metadata      = { "source_code_uri" => "https://github.com/riley0122/rubymag/cli" }
+    s.homepage      = 'https://github.com/riley0122/rubymag/tree/main/cli#readme'
+    s.metadata      = { "source_code_uri" => "https://github.com/riley0122/rubymag/tree/main/cli" }
 end
