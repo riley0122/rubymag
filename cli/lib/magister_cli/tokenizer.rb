@@ -7,7 +7,7 @@ class Tokenizer
         [/^\d+/, "NUMBER"],
         [/^'[^']*'/, "STRING"],
         [/^"[^"]*"/, "STRING"],
-        [/^\s+/, "WHITESPACE"]
+        [/^\s+/, nil]
     ]
 
     def init(string)
@@ -34,6 +34,7 @@ class Tokenizer
             matched = string.match item[0]
 
             if item[1] == nil
+                @cursor += matched[0].length
                 return get_next_token
             end
 
@@ -41,10 +42,7 @@ class Tokenizer
                 @cursor += matched[0].length
                 value = matched[0]
 
-                if item[1] == "WHITESPACE"
-                    # Get next token after whitespace
-                    return self.get_next_token
-                elsif item[1] == "STRING"
+                if item[1] == "STRING"
                     # Remove last character
                     value.delete_suffix!("'")
                     value.delete_suffix!('"')
