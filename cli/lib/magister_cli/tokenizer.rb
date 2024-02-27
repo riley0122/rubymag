@@ -7,6 +7,7 @@ class Tokenizer
         [/^\d+/, "NUMBER"],
         [/^'[^']*'/, "STRING"],
         [/^"[^"]*"/, "STRING"],
+        [/^\s+/, "WHITESPACE"]
     ]
 
     def init(string)
@@ -31,8 +32,19 @@ class Tokenizer
 
         @@spec.each do |item|
             matched = string.match item[0]
+
+            if item[1] == nil
+                return get_next_token
+            end
+
             if matched != nil
                 @cursor += matched[0].length
+
+                if item[1] == "WHITESPACE"
+                    # Get next token after whitespace
+                    return self.get_next_token
+                end
+
                 return {"type" => item[1], "value" => matched[0]}
             end
         end

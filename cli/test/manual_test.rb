@@ -6,6 +6,6 @@ require "magister_cli/parser"
 require "json"
 
 @parser = Parser.new
-program = "12"
+program = "   12   "
 ast = @parser.parse(program)
 puts ast.to_json
