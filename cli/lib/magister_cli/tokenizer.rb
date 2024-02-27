@@ -39,13 +39,18 @@ class Tokenizer
 
             if matched != nil
                 @cursor += matched[0].length
+                value = matched[0]
 
                 if item[1] == "WHITESPACE"
                     # Get next token after whitespace
                     return self.get_next_token
+                elsif item[1] == "STRING"
+                    # Remove last character
+                    value.delete_suffix!("'")
+                    value.delete_suffix!('"')
                 end
 
-                return {"type" => item[1], "value" => matched[0]}
+                return {"type" => item[1], "value" => value}
             end
         end
 
