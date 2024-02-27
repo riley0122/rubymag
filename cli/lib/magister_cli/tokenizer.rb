@@ -3,6 +3,12 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 class Tokenizer
+    @@spec = [
+        [/^\d+/, "NUMBER"],
+        [/^'[^']*'/, "STRING"],
+        [/^"[^"]*"/, "STRING"],
+    ]
+
     def init(string)
         @string = string
         @cursor = 0
@@ -12,6 +18,10 @@ class Tokenizer
         @cursor < @string.length
     end
 
+    def isEOF?
+        @cursor == @string.length
+    end
+
     def get_next_token
         if !hasMoreTokens
             return nil
@@ -19,14 +29,14 @@ class Tokenizer
 
         string = @string[@cursor..-1]
 
-        if string[0].is_integer?
-          number = ''
-          while string[@cursor] != nil && string[@cursor].is_integer?
-            number += string[@cursor]
-            @cursor += 1
-          end
-
-          {"type" => "NUMBER", "value" => number}
+        @@spec.each do |item|
+            matched = string.match item[0]
+            if matched != nil
+                @cursor += matched[0].length
+                return {"type" => item[1], "value" => matched[0]}
+            end
         end
+
+        throw SyntaxError.new "[tokenizer] Couldn't match"
     end
 end
