@@ -1,0 +1,27 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+require "minitest/test_task"
+require "rubygems"
+
+spec = Gem::Specification::load("magister_cli.gemspec")
+
+Minitest::TestTask.create
+
+desc "Build the gem"
+task :build do
+  puts "building version #{spec.version}"
+  sh 'gem build magister_cli.gemspec'
+end
+
+desc "Install the gem"
+task :install do
+  sh "gem install ./magister_cli-#{spec.version.to_s}.gem"
+end
+
+desc "Clean the gems"
+task :clean do
+  sh 'powershell -command "rm magister_cli-*.gem"'
+end
+
+task default: [:clean, :build, :install, :test]

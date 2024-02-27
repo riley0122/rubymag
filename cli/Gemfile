@@ -1,2 +1,7 @@
 source 'https://rubygems.org'
-gem 'magister'
+
+gemspec
+
+group :development do
+    gem 'rake'
+end

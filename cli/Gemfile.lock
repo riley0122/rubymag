@@ -1,3 +1,10 @@
+PATH
+  remote: .
+  specs:
+    magister_cli (1.1.0)
+      json
+      magister
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -8,6 +15,7 @@ GEM
       json (~> 2.7, >= 2.7.1)
       securerandom (~> 0.3.1)
       selenium-webdriver (~> 4.17)
+    rake (13.1.0)
     rexml (3.2.6)
     rubyzip (2.3.2)
     securerandom (0.3.1)
@@ -22,7 +30,8 @@ PLATFORMS
   x64-mingw-ucrt
 
 DEPENDENCIES
-  magister
+  magister_cli!
+  rake
 
 BUNDLED WITH
    2.4.10
