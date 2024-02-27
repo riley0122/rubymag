@@ -1,0 +1,50 @@
+CLI MOCKUP
+
+< input from user
+> output from program
+& action on the program
+
+=========================
+
+COMMANDS:
+
+- Login
+  takes 3 arguements.
+	- school: String
+	- username: String
+	- password: String
+
+example:
+< login
+> school:
+< [SCHOOL]
+> username:
+< [USERNAME]
+> password: 
+< [PASSWORD]
+> [LOGIN RESULT]
+& save the token + expiration in memory
+
+or
+
+< login {school: [SCHOOL]; password: "[PASSWORD (with spaces so quotes)]}
+> username:
+< [USERNAME]
+> [LOGIN RESULT]
+& save the token + expiration in memory
+
+or
+
+(when ran inline with [CMD] -r login {school: [SCHOOL]; password: "[PASSWORD (with spaces so quotes)]; username: [USERNAME]})
+> [TOKEN]
+
+or
+
+(when ran inline with [CMD] -r login)
+> school:
+< [SCHOOL]
+> username:
+< [USERNAME]
+> password: 
+< [PASSWORD]
+> [TOKEN]

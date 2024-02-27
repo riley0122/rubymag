@@ -1,4 +1,4 @@
-magister-*.*.*.gem
+*.gem
 .env
 .cache
 doc

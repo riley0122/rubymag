@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+require 'magister_cli'
+MagisterCLI::main
