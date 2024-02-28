@@ -6,6 +6,8 @@ require "magister_cli"
 require "magister_cli/parser"
 require "json"
 
+# TODO: rework completely, Currently doesnt apply to codebase
+
 class TestParser < Minitest::Test
     def setup
         @parser = Parser.new
