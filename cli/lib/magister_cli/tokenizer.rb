@@ -4,54 +4,91 @@
 
 class Tokenizer
     @@spec = [
-        [/^\d+/, "NUMBER"],
-        [/^'[^']*'/, "STRING"],
-        [/^"[^"]*"/, "STRING"],
-        [/^\s+/, nil]
+        [/(\w+)/, "KEYWORD"],
+        [/(?:\w+\s?){(.*)}/, "PARAMS"],
+        [/(?:\w+\s?(?:{.*}\s?)?)\[(.*)\]/, "OPTIONS"],
+        [/(\s+)/, "EMPTY"]
     ]
 
-    def init(string)
+    def initialize(string)
         @string = string
-        @cursor = 0
     end
 
-    def hasMoreTokens
-        @cursor < @string.length
-    end
+    def parse_options(optionsString)
+        cursor = 0
+        found = Array.new
+        while cursor < optionsString.length
+            scope = optionsString[cursor..-1]
 
-    def isEOF?
-        @cursor == @string.length
-    end
-
-    def get_next_token
-        if !hasMoreTokens
-            return nil
-        end
-
-        string = @string[@cursor..-1]
-
-        @@spec.each do |item|
-            matched = string.match item[0]
-
-            if item[1] == nil
-                @cursor += matched[0].length
-                return get_next_token
+            if scope[0] == "{" || scope[0] == "}" || scope[0] == "[" || scope[0] == "]"
+                cursor += 1
+                next
             end
 
-            if matched != nil
-                @cursor += matched[0].length
-                value = matched[0]
+            whiteSpaceMatch = scope.match /^\s+/
+            if whiteSpaceMatch != nil
+                cursor += whiteSpaceMatch[0].length
+                next
+            end
 
-                if item[1] == "STRING"
-                    # Remove last character
-                    value.delete_suffix!("'")
-                    value.delete_suffix!('"')
+            keywordMatch = scope.match /^\w+\s?:/
+            if keywordMatch != nil
+                cursor += keywordMatch[0].length
+                found.append({"type" => "KEYWORD", "value" => keywordMatch[0][0..-2]})
+                next
+            end
+
+            explicitString = scope.match /^'.*',?/
+            if explicitString != nil
+                cursor += explicitString[0].length
+                if explicitString[0].end_with?(",")
+                    found.append({"type" => "STRING", "value" => explicitString[0][1..-3]})
+                else
+                    found.append({"type" => "STRING", "value" => explicitString[0][1..-2]})
                 end
+                next
+            end
 
-                return {"type" => item[1], "value" => value}
+            impliedString = scope.match /^.*?,?/
+            if impliedString != nil
+                cursor += impliedString[0].length
+                if impliedString[0].end_with?(",")
+                    found.append({"type" => "STRING", "value" => impliedString[0][1..-3]})
+                else
+                    found.append({"type" => "STRING", "value" => impliedString[0][1..-2]})
+                end
+                next
             end
         end
+        parsed = Array.new
+        i = 0
+        while i < found.length
+            if found[i]["type"] != "KEYWORD" || found[i + 1]["type"] != "STRING"
+                throw TypeError.new "Expected #{found[i]["value"]} to be a KEYWORD and #{found[i + 1]["value"]} to be a STRING"
+            end
 
-        throw SyntaxError.new "[tokenizer] Couldn't match"
+            parsed.append({"type" => "PROPERTY", "key" => found[i]["value"], "value" => found[i + 1]["value"]})
+
+            i += 2
+        end
+        parsed
+    end
+
+    def tokenize
+        @tokens = Array.new
+        @@spec.each do |item|
+            matched = @string.match item[0]
+            if matched != nil
+                matched.captures.each do |match|
+                    if item[1] == "PARAMS" || item[1] == "OPTIONS"
+                        @tokens.append({"type" => item[1], "value" => parse_options(match)})
+                    elsif item[1] == "EMPTY"
+                    else
+                        @tokens.append({"type" => item[1], "value" => match})
+                    end
+                end
+            end
+        end
+        @tokens
     end
 end

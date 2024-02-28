@@ -24,4 +24,5 @@ task :clean do
   sh 'powershell -command "rm magister_cli-*.gem"'
 end
 
-task default: [:clean, :build, :install, :test]
+task notest: [:clean, :build, :install]
+task default: [:notest, :test]

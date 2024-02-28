@@ -3,6 +3,8 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 require 'magister'
 require 'magister_cli/ext/string'
+require 'magister_cli/parser'
+require 'magister_cli/tokenizer'
 
 $magcli_runmode = "normal"
 
