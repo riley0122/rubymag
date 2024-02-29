@@ -5,7 +5,11 @@ require 'magister_cli/tokenizer'
 
 class Parser
     @@actions = [
-        ['login', ['username', 'password', 'school']]
+        ['login', ['username', 'password', 'school']],
+        ['auth', ['token', 'school']],
+        ['quit', []],
+        ['exit', []],
+        ['get_classes', ['date_from', 'date_to']]
     ]
 
     def initialize(string)
@@ -49,7 +53,7 @@ class Parser
 
             if tokens[0 + i]["type"] != "KEYWORD"
                 puts "Current index: #{i.to_s}"
-                throw SyntaxError.new "Expected #{tokens[0 + i]["value"]} to be a KEYWORD, is a #{tokens[0 + i]["type"]}"
+                raise SyntaxError.new "Expected #{tokens[0 + i]["value"]} to be a KEYWORD, is a #{tokens[0 + i]["type"]}"
             end
 
             if tokens[1 + i] != nil && tokens[1 + i]["type"] == "PARAMS"
@@ -64,7 +68,7 @@ class Parser
 
             if tokens[1 + i] != nil && tokens[1 + i]["type"] == "OPTIONS"
                 if opts || props
-                    throw SyntaxError.new "Cant have type OPTIONS here, must be PARAMS"
+                    raise SyntaxError.new "Cant have type OPTIONS here, must be PARAMS"
                 end
                 opts = true
                 altOpts = true
@@ -92,11 +96,15 @@ class Parser
             lacking = Array.new
             lacking = get_args(ast_node["action"])
 
-            ast_node["parameters"].each do |prop|
-                if !lacking.include? prop["key"]
-                    throw SyntaxError.new "#{prop["key"]} is is already defined or is not a valid parameter for #{ast_node["action"]}!"
+            if props
+                ast_node["parameters"].each do |prop|
+                    if !lacking.include? prop["key"]
+                        raise SyntaxError.new "#{prop["key"]} is is already defined or is not a valid parameter for #{ast_node["action"]}!"
+                    end
+                    lacking.delete prop["key"]
                 end
-                lacking.delete prop["key"]
+            else
+                ast_node["parameters"] = Array.new
             end
 
             ast_node["lacking_params"] = lacking

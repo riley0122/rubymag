@@ -5,13 +5,21 @@ require 'magister'
 require 'magister_cli/ext/string'
 require 'magister_cli/parser'
 require 'magister_cli/tokenizer'
+require 'magister_cli/runtime'
+require 'io/console'
+
+$magister_cachingDirectory = Dir.home + "/.cache/magister"
 
 $magcli_runmode = "normal"
+$magcli_runtime_variables = {}
 
 module MagisterCLI
     extend self
 
     def main
+      $magcli_runtime_variables["magister"] = Magister.new
+
+      begin
         if ARGV.include?("-r") || ARGV.include?("--run")
             $magcli_runmode = "inline"
             args = ARGV
@@ -44,7 +52,12 @@ module MagisterCLI
             # get any parametres that werent set and ask then set them
             action["lacking_params"].each do |param|
               print "#{param}: "
-              ans = gets.chomp
+              if param == "password"
+                ans = STDIN.noecho(&:gets).chomp
+                print "\n"
+              else
+                ans = gets.chomp
+              end
               props.append({"type" => "PROPERTY", "key" => param, "value" => ans})
               doneParams.append param
             end
@@ -55,9 +68,23 @@ module MagisterCLI
             end
             action["parameters"] = props
             props = Array.new
+
+            runtime = Runtime.new(action)
           end
-          puts output
-          # TODO: run command
         end
+      rescue SignalException
+        $magcli_runtime_variables = Array.new
+        puts "[CTRL + C]\nExiting..."
+        exit
+      rescue UncaughtThrowError => e
+        if e.message.include? "#<SyntaxError: "
+          message = e.message.split("#<SyntaxError: ").last[0..-2]
+          puts "Invalid syntax: #{message}"
+        else
+          puts "Something went wrong: #{e.message}"
+        end
+      rescue => e
+        puts "Something went wrong: #{e.message}"
+      end
     end
 end

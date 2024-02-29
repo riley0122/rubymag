@@ -56,7 +56,7 @@ class Tokenizer
         i = 0
         while i < found.length
             if found[i]["type"] != "KEYWORD" || found[i + 1]["type"] != "STRING"
-                throw TypeError.new "Expected #{found[i]["value"]} to be a KEYWORD and #{found[i + 1]["value"]} to be a STRING"
+                raise TypeError.new "Expected #{found[i]["value"]} to be a KEYWORD and #{found[i + 1]["value"]} to be a STRING"
             end
 
             parsed.append({"type" => "PROPERTY", "key" => found[i]["value"], "value" => found[i + 1]["value"]})
