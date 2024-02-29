@@ -30,9 +30,34 @@ module MagisterCLI
             return
         end
 
-        # TODO: ask for command
-        # TOOD: tokenize command
-        # TODO: parse command
-        # TODO: run command
+        parser = Parser.new("")
+        while true
+          print "> "
+          input = gets.chomp
+          parser.string = input
+          output = parser.parse
+
+          # loop over each action that was outputted
+          output.each do |action|
+            props = action["parameters"]
+            doneParams = Array.new
+            # get any parametres that werent set and ask then set them
+            action["lacking_params"].each do |param|
+              print "#{param}: "
+              ans = gets.chomp
+              props.append({"type" => "PROPERTY", "key" => param, "value" => ans})
+              doneParams.append param
+            end
+
+            # update lacking_params value, done here as to not mess with the order while looping over them
+            doneParams.each do |p|
+              action["lacking_params"].delete(p)
+            end
+            action["parameters"] = props
+            props = Array.new
+          end
+          puts output
+          # TODO: run command
+        end
     end
 end

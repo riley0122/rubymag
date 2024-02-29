@@ -38,25 +38,17 @@ class Tokenizer
                 next
             end
 
-            explicitString = scope.match /^'.*',?/
+            explicitString = scope.match /^'([^']*)',*/
             if explicitString != nil
                 cursor += explicitString[0].length
-                if explicitString[0].end_with?(",")
-                    found.append({"type" => "STRING", "value" => explicitString[0][1..-3]})
-                else
-                    found.append({"type" => "STRING", "value" => explicitString[0][1..-2]})
-                end
+                found.append({"type" => "STRING", "value" => explicitString.captures[0]})
                 next
             end
 
-            impliedString = scope.match /^.*?,?/
+            impliedString = scope.match /^(.*?),*/
             if impliedString != nil
                 cursor += impliedString[0].length
-                if impliedString[0].end_with?(",")
-                    found.append({"type" => "STRING", "value" => impliedString[0][1..-3]})
-                else
-                    found.append({"type" => "STRING", "value" => impliedString[0][1..-2]})
-                end
+                found.append({"type" => "STRING", "value" => impliedString.captures[0]})
                 next
             end
         end
