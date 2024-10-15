@@ -36,7 +36,7 @@ module Authenticator
             puts "attempting to use cached token..."
             if expires.to_i > Time.now.to_i
               puts "using cached token."
-              return Profile.new(cached_data["token"], school)
+              return Profile.new(cached_data["#{school}/#{username}"], school)
             else
               puts "cached token expired."
             end
@@ -110,7 +110,7 @@ module Authenticator
 
         if $magister_useCache
             if $magister_cacheType == "json"
-              File.write($magister_cachingDirectory + "/auth.json", "{\"token\": \"#{token}\", \"expires\": \"#{expires.to_i}\"}")
+              File.write($magister_cachingDirectory + "/auth.json", "{\"#{school}/#{username}\": \"#{token}\", \"expires\": \"#{expires.to_i}\"}")
             end
         end
 
